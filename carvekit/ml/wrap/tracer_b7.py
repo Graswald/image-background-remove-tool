@@ -65,7 +65,7 @@ class TracerUniversalB7(TracerDecoder):
         self.transform = transforms.Compose(
             [
                 transforms.ToTensor(),
-                transforms.Resize(self.input_image_size),
+                transforms.Resize(self.input_image_size, antialias=True),
                 transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
             ]
         )
