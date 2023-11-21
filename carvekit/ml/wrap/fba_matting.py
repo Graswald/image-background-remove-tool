@@ -3,6 +3,7 @@ Source url: https://github.com/OPHoperHPO/image-background-remove-tool
 Author: Nikita Selin (OPHoperHPO)[https://github.com/OPHoperHPO].
 License: Apache License 2.0
 """
+import os.path
 import pathlib
 from typing import Union, List, Tuple
 
@@ -62,6 +63,8 @@ class FBAMatting(FBA):
             self.input_image_size = (input_tensor_size, input_tensor_size)
         self.to(device)
         if model_path is None:
+            model_path = fba_pretrained()
+        if not os.path.exists(model_path):
             model_path = fba_pretrained()
         if load_pretrained:
             self.load_state_dict(torch.load(model_path, map_location=self.device))

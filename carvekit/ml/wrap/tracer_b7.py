@@ -4,6 +4,7 @@ Author: Nikita Selin (OPHoperHPO)[https://github.com/OPHoperHPO].
 License: Apache License 2.0
 """
 import pathlib
+import os
 import warnings
 from typing import List, Union
 import PIL.Image
@@ -48,6 +49,9 @@ class TracerUniversalB7(TracerDecoder):
         """
         if model_path is None:
             model_path = tracer_b7_pretrained()
+        if not os.path.exists(model_path):
+            model_path = tracer_b7_pretrained()
+
         super(TracerUniversalB7, self).__init__(
             encoder=EfficientEncoderB7(),
             rfb_channel=[32, 64, 128],
