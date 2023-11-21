@@ -58,6 +58,7 @@ class HiInterface(Interface):
                 batch_size=batch_size_seg,
                 input_image_size=seg_mask_size,
                 fp16=fp16,
+                model_path="tracer_b7.pth"
             )
         elif object_type == "hairs-like":
             self.u2net = U2NET(
@@ -75,6 +76,7 @@ class HiInterface(Interface):
                 batch_size=batch_size_seg,
                 input_image_size=seg_mask_size,
                 fp16=fp16,
+                model_path="u2net.pth"
             )
 
         self.fba = FBAMatting(
@@ -82,6 +84,7 @@ class HiInterface(Interface):
             device=device,
             input_tensor_size=matting_mask_size,
             fp16=fp16,
+            model_path="fba.pth"
         )
         self.trimap_generator = TrimapGenerator(
             prob_threshold=trimap_prob_threshold,

@@ -38,6 +38,7 @@ class FBAMatting(FBA):
         encoder="resnet50_GN_WS",
         load_pretrained: bool = True,
         fp16: bool = False,
+        model_path: str = None,
     ):
         """
         Initialize the FBAMatting model
@@ -60,8 +61,10 @@ class FBAMatting(FBA):
         else:
             self.input_image_size = (input_tensor_size, input_tensor_size)
         self.to(device)
+        if model_path is None:
+            model_path = fba_pretrained()
         if load_pretrained:
-            self.load_state_dict(torch.load(fba_pretrained(), map_location=self.device))
+            self.load_state_dict(torch.load(model_path, map_location=self.device))
         self.eval()
 
     def data_preprocessing(
